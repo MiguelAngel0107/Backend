@@ -273,7 +273,7 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-if not DEBUG:
+"""if not DEBUG:
     DEFAULT_FROM_EMAIL = 'Vudera - Academia de Software <mail@vudera.com>'
     EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = config('EMAIL_HOST')
@@ -307,4 +307,4 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')"""
