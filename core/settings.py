@@ -17,7 +17,9 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    'owndark.onrender.com', 
+    'www.owndark.onrender.com',
+    'owndark.onrender.com',
+    'localhost' 
 ]
 
 if not DEBUG:
@@ -117,7 +119,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE'),
+        default=config('DATABASE_URL'),
         conn_max_age=600,
         conn_health_checks=True,
     )
