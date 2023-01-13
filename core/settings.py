@@ -17,8 +17,7 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    'www.owndark.onrender.com',
-    'owndark.onrender.com',
+    
     'localhost' 
 ]
 
@@ -188,10 +187,7 @@ REST_FRAMEWORK = {
 
 if not DEBUG:
     CORS_ALLOWED_ORIGINS = [
-        'http://owndark.onrender.com',
-        'https://owndark.onrender.com',
-        'owndark.onrender.com',    
-        'www.owndark.onrender.com'
+        
     ]
     CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
@@ -205,10 +201,7 @@ else:
 
 if not DEBUG:
     CSRF_TRUSTED_ORIGINS = [
-        'http://owndark.onrender.com',
-        'https://owndark.onrender.com',
-        'owndark.onrender.com',    
-        'www.owndark.onrender.com'  
+        
     ]
     CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
