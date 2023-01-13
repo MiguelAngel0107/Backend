@@ -21,10 +21,10 @@ ALLOWED_HOSTS = [
     'localhost' 
 ]
 
-"""if not DEBUG:
+if not DEBUG:
     RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
     if RENDER_EXTERNAL_HOSTNAME:
-        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)"""
+        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
 
 # Application definition
 # Se tiene que hacer makemigrations, declarando cada una de las apps por individual
@@ -190,9 +190,6 @@ if not DEBUG:
         
     ]
     #CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
-    RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
-    if RENDER_EXTERNAL_HOSTNAME:
-        CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
     CORS_ALLOWED_ORIGINS = [
         'http://localhost:3000',
