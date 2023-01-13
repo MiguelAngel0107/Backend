@@ -187,7 +187,8 @@ REST_FRAMEWORK = {
 
 if not DEBUG:
     CORS_ALLOWED_ORIGINS = [
-        
+        'https://owndark.onrender.com',
+        'http://owndark.onrender.com'
     ]
     #CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
@@ -201,7 +202,8 @@ else:
 
 if not DEBUG:
     CSRF_TRUSTED_ORIGINS = [
-        
+        'https://owndark.onrender.com',
+        'http://owndark.onrender.com'
     ]
     #CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
