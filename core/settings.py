@@ -191,6 +191,7 @@ if not DEBUG:
         'http://owndark.onrender.com',
         'https://owndark.onrender.com',
         'owndark.onrender.com',    
+        'www.owndark.onrender.com'
     ]
     CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
@@ -206,7 +207,8 @@ if not DEBUG:
     CSRF_TRUSTED_ORIGINS = [
         'http://owndark.onrender.com',
         'https://owndark.onrender.com',
-        'owndark.onrender.com',      
+        'owndark.onrender.com',    
+        'www.owndark.onrender.com'  
     ]
     CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
