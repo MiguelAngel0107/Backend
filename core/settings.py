@@ -118,7 +118,7 @@ WSGI_APPLICATION = "core.wsgi.application"
 
 DATABASES = {
     'default': dj_database_url.config(
-        default=config('DATABASE_URL'),
+        default=config('DATABASE'),
         conn_max_age=600,
         conn_health_checks=True,
     )
@@ -188,7 +188,9 @@ REST_FRAMEWORK = {
 if not DEBUG:
     CORS_ALLOWED_ORIGINS = [
         'https://owndark.onrender.com',
-        'http://owndark.onrender.com'
+        'http://owndark.onrender.com',
+        'https://www.owndark.com',
+        'http://www.owndark.com',
     ]
     #CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
@@ -203,7 +205,10 @@ else:
 if not DEBUG:
     CSRF_TRUSTED_ORIGINS = [
         'https://owndark.onrender.com',
-        'http://owndark.onrender.com'
+        'http://owndark.onrender.com',
+        'https://www.owndark.com',
+        'http://www.owndark.com',
+
     ]
     #CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
@@ -267,3 +272,39 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+if not DEBUG:
+    DEFAULT_FROM_EMAIL = 'Vudera - Academia de Software <mail@vudera.com>'
+    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = config('EMAIL_HOST')
+    EMAIL_HOST_USER = config('EMAIL_HOST_USER')
+    EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
+    EMAIL_PORT = config('EMAIL_PORT')
+    EMAIL_USE_TLS = config('EMAIL_USE_TLS')
+
+    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    AWS_QUERYSTRING_AUTH = False
+
+    # aws settings
+
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_DEFAULT_ACL = 'public-read'
+
+    # s3 static settings
+    STATIC_LOCATION = 'static'
+    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+    # s3 public media settings
+
+    PUBLIC_MEDIA_LOCATION = 'media'
+    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
+    DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
+
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
