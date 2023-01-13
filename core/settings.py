@@ -189,7 +189,7 @@ if not DEBUG:
     CORS_ALLOWED_ORIGINS = [
         
     ]
-    CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
+    #CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
     CORS_ALLOWED_ORIGINS = [
         'http://localhost:3000',
@@ -203,7 +203,7 @@ if not DEBUG:
     CSRF_TRUSTED_ORIGINS = [
         
     ]
-    CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
+    #CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
     CSRF_TRUSTED_ORIGINS = [
         'http://localhost:3000',
