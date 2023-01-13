@@ -188,6 +188,7 @@ if not DEBUG:
         'https://owndark.onrender.com',
         'owndark.onrender.com',    
     ]
+    CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
     CORS_ALLOWED_ORIGINS = [
         'http://localhost:3000',
@@ -203,6 +204,7 @@ if not DEBUG:
         'https://owndark.onrender.com',
         'owndark.onrender.com',      
     ]
+    CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
     CSRF_TRUSTED_ORIGINS = [
         'http://localhost:3000',
