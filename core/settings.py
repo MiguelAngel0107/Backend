@@ -184,9 +184,9 @@ REST_FRAMEWORK = {
 
 if not DEBUG:
     CORS_ORIGIN_WHITELIST = [
-        'http://owndarkbackend.onrender.com',
-        'https://owndarkbackend.onrender.com',
-        'owndarkbackend.onrender.com',    
+        'http://owndark.onrender.com',
+        'https://owndark.onrender.com',
+        'owndark.onrender.com',    
     ]
 else:
     CORS_ORIGIN_WHITELIST = [
@@ -199,9 +199,9 @@ else:
 
 if not DEBUG:
     CSRF_TRUSTED_ORIGINS = [
-        'http://owndarkbackend.onrender.com',
-        'https://owndarkbackend.onrender.com',
-        'owndarkbackend.onrender.com',    
+        'http://owndark.onrender.com',
+        'https://owndark.onrender.com',
+        'owndark.onrender.com',      
     ]
 else:
     CSRF_TRUSTED_ORIGINS = [
