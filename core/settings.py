@@ -183,13 +183,13 @@ REST_FRAMEWORK = {
 }
 
 if not DEBUG:
-    CORS_ORIGIN_WHITELIST = [
+    CORS_ALLOWED_ORIGINS = [
         'http://owndark.onrender.com',
         'https://owndark.onrender.com',
         'owndark.onrender.com',    
     ]
 else:
-    CORS_ORIGIN_WHITELIST = [
+    CORS_ALLOWED_ORIGINS = [
         'http://localhost:3000',
         'http://localhost:8000',
         'http://127.0.0.1:8000',
@@ -210,10 +210,6 @@ else:
         'http://127.0.0.1:8000',
         'http://127.0.0.1:3000',  
     ]
-
-
-
-
 
 
 PASSWORD_HASHERS = [
