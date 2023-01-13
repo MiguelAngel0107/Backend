@@ -17,8 +17,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    'http://owndark.onrender.com',
-    'https://owndark.onrender.com',
     'owndark.onrender.com', 
 ]
 
