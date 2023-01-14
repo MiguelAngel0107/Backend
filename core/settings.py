@@ -19,16 +19,22 @@ SECRET_KEY = config('SECRET_KEY')
 DEBUG = config('DEBUG', default=False, cast=bool)
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = [
-    'owndarkbackend.onrender.com',
-    'www.owndarkbackend.onrender.com',
-    'owndark.onrender.com', 
-    'www.owndark.onrender.com', 
-    'owndark.com',
-    'www.owndark.com',
-    '0.0.0.0:10000',
-    '0.0.0.0'
-]
+if not DEBUG:
+    ALLOWED_HOSTS = [
+        'owndarkbackend.onrender.com',
+        'www.owndarkbackend.onrender.com',
+        'owndark.onrender.com', 
+        'www.owndark.onrender.com', 
+        'owndark.com',
+        'www.owndark.com',
+        '0.0.0.0:10000',
+        '0.0.0.0'
+    ]
+else:
+    ALLOWED_HOSTS = [
+        'localhost',
+        '127.0.0.1'
+    ]
 
 if not DEBUG:
     RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
@@ -167,7 +173,7 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
 
 STATIC_URL = '/static/'
 if not DEBUG:
@@ -342,4 +348,3 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'"""
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-    #STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
