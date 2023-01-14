@@ -306,7 +306,7 @@ if not DEBUG:
     EMAIL_PORT = config('EMAIL_PORT')
     EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    """# django-ckeditor will not work with S3 through django-storages without this line in settings.py
     AWS_QUERYSTRING_AUTH = False
 
     # aws settings
@@ -331,4 +331,4 @@ if not DEBUG:
     DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
 
     #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')"""
