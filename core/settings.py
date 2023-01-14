@@ -7,6 +7,9 @@ from decouple import config
 # Conectarse a Databases en Produccion
 import dj_database_url
 
+#Enviar correos
+
+
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
@@ -192,7 +195,6 @@ if not DEBUG:
         'https://www.owndark.com',
         'http://www.owndark.com',
     ]
-    #CORS_ALLOWED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
     CORS_ALLOWED_ORIGINS = [
         'http://localhost:3000',
@@ -210,7 +212,6 @@ if not DEBUG:
         'http://www.owndark.com',
 
     ]
-    #CSRF_TRUSTED_ORIGINS.append(RENDER_EXTERNAL_HOSTNAME)
 else:
     CSRF_TRUSTED_ORIGINS = [
         'http://localhost:3000',
@@ -266,16 +267,39 @@ BT_PUBLIC_KEY = config('BT_PUBLIC_KEY')
 BT_PRIVATE_KEY = config('BT_PRIVATE_KEY')
 
 AUTH_USER_MODEL = "user.UserAccount"
+
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
+
+"""message = Mail(
+    from_email='admin@owndark.com',
+    to_emails='miguelegocheaga17@gmail.com',
+    subject='Correo de Acceso',
+    html_content='<strong>and easy to do anywhere, even with Python</strong>')
+
+try:
+    #clave/token para enviar
+    sg = SendGridAPIClient(config('SENDGRID_API_KEY'))
+    #funcion de send para enviar
+    response = sg.send(message)
+    #Respuesta en consola
+    print("-----------------------------------------------")
+    print(response.status_code)
+    print("--------------------")
+    print(response.body)
+    print("--------------------")
+    print(response.headers)
+    print("-----------------------------------------------")
+except Exception as e:
+    print(e.message)"""
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-"""if not DEBUG:
-    DEFAULT_FROM_EMAIL = 'Vudera - Academia de Software <mail@vudera.com>'
-    EMAIL_BACKEND='django.core.mail.backends.smtp.EmailBackend'
+if not DEBUG:
+    DEFAULT_FROM_EMAIL = 'OwnDark - Tienda de Software <admin@owndark.com>'
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
     EMAIL_HOST = config('EMAIL_HOST')
     EMAIL_HOST_USER = config('EMAIL_HOST_USER')
     EMAIL_HOST_PASSWORD = config('EMAIL_HOST_PASSWORD')
@@ -307,4 +331,4 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
     DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')"""
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
