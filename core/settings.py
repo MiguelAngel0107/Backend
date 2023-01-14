@@ -169,7 +169,7 @@ STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
 
 STATIC_URL = '/static/'
 if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles') 
+    STATIC_ROOT = os.path.join(BASE_DIR, '/staticfiles/') 
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -313,7 +313,7 @@ if not DEBUG:
     EMAIL_PORT = config('EMAIL_PORT')
     EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    """# django-ckeditor will not work with S3 through django-storages without this line in settings.py
     AWS_QUERYSTRING_AUTH = False
 
     # aws settings
@@ -335,7 +335,7 @@ if not DEBUG:
 
     PUBLIC_MEDIA_LOCATION = 'media'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
+    DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'"""
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+    STATIC_ROOT = os.path.join(BASE_DIR, '/staticfiles/')
