@@ -20,7 +20,10 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    'localhost' 
+    'localhost',
+    '127.0.0.1',
+    'owndarkbackend.onrender.com',
+    'www.owndarkbackend.onrender.com' 
 ]
 
 if not DEBUG:
@@ -160,7 +163,7 @@ USE_TZ = True
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
-
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
 
 STATIC_URL = '/static/'
 if not DEBUG:
@@ -193,10 +196,14 @@ if not DEBUG:
         'http://owndark.onrender.com',
         'https://www.owndark.com',
         'http://www.owndark.com',
+
         'http://localhost:3000',
         'http://localhost:8000',
         'http://127.0.0.1:8000',
-        'http://127.0.0.1:3000', 
+        'http://127.0.0.1:3000',
+
+        'https://owndarkbackend.onrender.com', 
+        'http://owndarkbackend.onrender.com' 
     ]
 else:
     CORS_ALLOWED_ORIGINS = [
@@ -214,10 +221,14 @@ if not DEBUG:
         'http://owndark.onrender.com',
         'https://www.owndark.com',
         'http://www.owndark.com',
+        
         'http://localhost:3000',
         'http://localhost:8000',
         'http://127.0.0.1:8000',
-        'http://127.0.0.1:3000', 
+        'http://127.0.0.1:3000',
+
+        'https://owndarkbackend.onrender.com', 
+        'http://owndarkbackend.onrender.com'  
 
     ]
 else:
