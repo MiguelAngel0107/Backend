@@ -198,8 +198,8 @@ if not DEBUG:
     CORS_ALLOWED_ORIGINS = [
         'https://owndark.onrender.com',
         'http://owndark.onrender.com',
-        'https://www.owndark.com',
-        'http://www.owndark.com',
+        'https://owndark.com',
+        'http://owndark.com',
         'https://owndarkbackend.onrender.com', 
         'http://0.0.0.0:10000'
     ]
@@ -217,8 +217,8 @@ if not DEBUG:
     CSRF_TRUSTED_ORIGINS = [
         'https://owndark.onrender.com',
         'http://owndark.onrender.com',
-        'https://www.owndark.com',
-        'http://www.owndark.com',
+        'https://owndark.com',
+        'http://owndark.com',
         'https://owndarkbackend.onrender.com',  
         'http://0.0.0.0:10000'
 
