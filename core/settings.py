@@ -26,6 +26,8 @@ ALLOWED_HOSTS = [
     'www.owndark.onrender.com', 
     'owndark.com',
     'www.owndark.com',
+    '0.0.0.0:10000',
+    '0.0.0.0'
 ]
 
 if not DEBUG:
@@ -199,6 +201,7 @@ if not DEBUG:
         'https://www.owndark.com',
         'http://www.owndark.com',
         'https://owndarkbackend.onrender.com', 
+        'http://0.0.0.0:10000'
     ]
 else:
     CORS_ALLOWED_ORIGINS = [
@@ -217,6 +220,7 @@ if not DEBUG:
         'https://www.owndark.com',
         'http://www.owndark.com',
         'https://owndarkbackend.onrender.com',  
+        'http://0.0.0.0:10000'
 
     ]
 else:
