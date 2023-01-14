@@ -20,7 +20,6 @@ DEBUG = config('DEBUG', default=False, cast=bool)
 
 # https://docs.djangoproject.com/en/3.0/ref/settings/#allowed-hosts
 ALLOWED_HOSTS = [
-    
     'localhost' 
 ]
 
@@ -100,7 +99,7 @@ ROOT_URLCONF = "core.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [],
+        "DIRS": [os.path.join(BASE_DIR, 'build')],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -194,13 +193,18 @@ if not DEBUG:
         'http://owndark.onrender.com',
         'https://www.owndark.com',
         'http://www.owndark.com',
+        'http://localhost:3000',
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'http://127.0.0.1:3000', 
     ]
 else:
     CORS_ALLOWED_ORIGINS = [
         'http://localhost:3000',
         'http://localhost:8000',
         'http://127.0.0.1:8000',
-        'http://127.0.0.1:3000',  
+        'http://127.0.0.1:3000',
+
     ]
 
 
@@ -210,6 +214,10 @@ if not DEBUG:
         'http://owndark.onrender.com',
         'https://www.owndark.com',
         'http://www.owndark.com',
+        'http://localhost:3000',
+        'http://localhost:8000',
+        'http://127.0.0.1:8000',
+        'http://127.0.0.1:3000', 
 
     ]
 else:
@@ -306,7 +314,7 @@ if not DEBUG:
     EMAIL_PORT = config('EMAIL_PORT')
     EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-    """# django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
     AWS_QUERYSTRING_AUTH = False
 
     # aws settings
@@ -330,5 +338,5 @@ if not DEBUG:
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
     DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
 
-    #STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')"""
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
