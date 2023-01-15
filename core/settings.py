@@ -170,7 +170,10 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
+
+"""MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 MEDIA_URL = '/media/'
 
 # STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
@@ -180,7 +183,9 @@ if not DEBUG:
     STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/') 
     STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')"""
+
+
 
 
 AUTHENTICATION_BACKENDS = (
@@ -287,28 +292,6 @@ AUTH_USER_MODEL = "user.UserAccount"
 
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
-"""message = Mail(
-    from_email='admin@owndark.com',
-    to_emails='miguelegocheaga17@gmail.com',
-    subject='Correo de Acceso',
-    html_content='<strong>and easy to do anywhere, even with Python</strong>')
-
-try:
-    #clave/token para enviar
-    sg = SendGridAPIClient(config('SENDGRID_API_KEY'))
-    #funcion de send para enviar
-    response = sg.send(message)
-    #Respuesta en consola
-    print("-----------------------------------------------")
-    print(response.status_code)
-    print("--------------------")
-    print(response.body)
-    print("--------------------")
-    print(response.headers)
-    print("-----------------------------------------------")
-except Exception as e:
-    print(e.message)"""
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
@@ -323,7 +306,7 @@ if not DEBUG:
     EMAIL_PORT = config('EMAIL_PORT')
     EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-    """# django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
     AWS_QUERYSTRING_AUTH = False
 
     # aws settings
@@ -337,14 +320,16 @@ if not DEBUG:
     AWS_DEFAULT_ACL = 'public-read'
 
     # s3 static settings
-    STATIC_LOCATION = 'static'
+    STATIC_LOCATION = 'static/'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
     STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     # s3 public media settings
 
-    PUBLIC_MEDIA_LOCATION = 'media'
+    PUBLIC_MEDIA_LOCATION = 'media/'
     MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'"""
+    DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'
+
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
