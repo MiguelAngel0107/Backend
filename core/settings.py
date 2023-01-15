@@ -7,11 +7,6 @@ from decouple import config
 # Conectarse a Databases en Produccion
 import dj_database_url
 
-from storages.backends.s3boto3 import S3Boto3Storage
-class StaticStorage(S3Boto3Storage):
-    location = 'static'
-    default_acl = 'private'
-
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -325,8 +320,7 @@ if not DEBUG:
     # s3 static settings
     STATIC_LOCATION = 'static'
     STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{STATIC_LOCATION}/'
-    #STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-    STATICFILES_STORAGE = 'StaticStorage'
+    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 
     # s3 public media settings
 
