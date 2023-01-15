@@ -7,6 +7,8 @@ from decouple import config
 # Conectarse a Databases en Produccion
 import dj_database_url
 
+#from .storage_backeds import StaticStorage, MediaStorage 
+
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -68,6 +70,7 @@ ECOMMERCE_APPS=[
 ]
 
 THIRD_PARTY_APPS=[
+    'storages',
     'corsheaders',
     'rest_framework',
     'djoser',
@@ -125,10 +128,6 @@ TEMPLATES = [
 
 WSGI_APPLICATION = "core.wsgi.application"
 
-
-# Database
-# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
-
 DATABASES = {
     'default': dj_database_url.config(
         default=config('DATABASE'),
@@ -136,10 +135,6 @@ DATABASES = {
         conn_health_checks=True,
     )
 }
-
-
-# Password validation
-# https://docs.djangoproject.com/en/4.1/ref/settings/#auth-password-validators
 
 AUTH_PASSWORD_VALIDATORS = [
     {
@@ -156,35 +151,10 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
-
-# Internationalization
-# https://docs.djangoproject.com/en/4.1/topics/i18n/
-
 LANGUAGE_CODE = "es-es"
 TIME_ZONE = "UTC"
 USE_I18N = True
 USE_TZ = True
-
-# Static files (CSS, JavaScript, Images)
-# https://docs.djangoproject.com/en/4.1/howto/static-files/
-
-
-
-
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-MEDIA_URL = '/media/'
-
-# STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-
-STATIC_URL = '/static/'
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/') 
-    STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-else:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
-
-
-
 
 AUTHENTICATION_BACKENDS = (
     'social_core.backends.google.GoogleOAuth2',
@@ -290,10 +260,52 @@ AUTH_USER_MODEL = "user.UserAccount"
 
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
+DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+#----------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
+
+"""# django-ckeditor will not work with S3 through django-storages without this line in settings.py
+AWS_QUERYSTRING_AUTH = False
+
+# aws settings
+AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME = 'devinvsc'
+
+AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+AWS_DEFAULT_ACL = 'public-read'
+
+# s3 static settings
+STATICFILES_LOCATION = 'static'
+STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
+STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+
+# s3 public media settings
+MEDIAFILES_LOCATION = 'media'
+MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+DEFAULT_FILE_STORAGE = 'core.storage_backeds.MediaStorage'
+
+STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+
+# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
+
+# STATIC_URL = '/static/'
+# MEDIA_URL = '/media/'
+
+if not DEBUG:
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/') 
+    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'"""
+
+
+#----------------------------------------------------------------------------------------------------------------------
+#----------------------------------------------------------------------------------------------------------------------
+
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
-DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 if not DEBUG:
     DEFAULT_FROM_EMAIL = 'OwnDark - Tienda de Software <admin@owndark.com>'
@@ -304,7 +316,7 @@ if not DEBUG:
     EMAIL_PORT = config('EMAIL_PORT')
     EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-    """# django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
     AWS_QUERYSTRING_AUTH = False
 
     # aws settings
@@ -318,15 +330,14 @@ if not DEBUG:
     AWS_DEFAULT_ACL = 'public-read'
 
     # s3 static settings
-    STATIC_LOCATION = 'static'
-    STATIC_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/'
-    STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
     # s3 public media settings
-
-    PUBLIC_MEDIA_LOCATION = 'media'
-    MEDIA_URL = f'https://{AWS_S3_CUSTOM_DOMAIN}/{PUBLIC_MEDIA_LOCATION}/'
-    DEFAULT_FILE_STORAGE = 'core.storage_backends.MediaStore'"""
+    MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    DEFAULT_FILE_STORAGE = 'core.storage_backeds.MediaStorage'
 
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)

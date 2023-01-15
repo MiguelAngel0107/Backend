@@ -1,0 +1,32 @@
+Django==3.2.16
+
+django-environ
+python-decouple==3.7 # Oculta las variables de entorno
+
+django-cors-headers==3.13.0 # Provee de permisos para que no accedan todos a la API
+djangorestframework==3.14.0 
+djoser==2.1.0
+social-auth-app-django==4.0.0 #Autheticacion con apps de terceros Google, Facebook, etc
+
+django-ckeditor==6.5.1 # Estilizar los textos, no muy importante y enrutar los archivos media
+pytz==2022.7 # Informacion sobre zonas horarias de toso el mundo
+Pillow==9.3.0 # Se usa para trabajar con Imagenes
+mutagen
+
+psycopg2==2.9.5 # Sirve para conectarme con PostgreSQL
+psycopg2-binary==2.9.5
+argon2-cffi==21.3.0
+
+braintree==4.17.1
+pyJWT==2.6.0
+
+boto3==1.26.47
+django-storages==1.13.2 # Este es para almacenar multimedia en CDN
+
+markdown==3.4.1
+gunicorn==20.1.0
+whitenoise==6.3.0 # Sirve archivos estaticos en produccion
+
+requests==2.28.1
+
+dj-database-url==1.2.0 # Necesario para desplegar en Render
