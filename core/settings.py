@@ -262,7 +262,15 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-TESTOFS3 = False
+
+#XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+#-----------------------------------------------------------------------------------
+#XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+TESTOFS3 = True
+#XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+#-----------------------------------------------------------------------------------
+#XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+
 
 if DEBUG and TESTOFS3:
 
@@ -280,23 +288,26 @@ if DEBUG and TESTOFS3:
 
     # s3 static settings
     STATICFILES_LOCATION = 'static'
+    STATIC_URL = '/static/'
+    STATIC_ROOT = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
     STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
     # s3 public media settings
     MEDIAFILES_LOCATION = 'media'
-    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
     DEFAULT_FILE_STORAGE = 'core.storage_backeds.MediaStorage'
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
 
 
 if DEBUG and not TESTOFS3:
-    MEDIA_URL = '/media/'
     STATIC_URL = '/static/'
-    STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'test')
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+
+    MEDIA_URL = '/media/'
+    MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
@@ -326,17 +337,18 @@ if not DEBUG:
 
         # s3 static settings
         STATICFILES_LOCATION = 'static'
+        STATIC_URL = '/static/'
+        STATIC_ROOT = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
         STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
-        STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
         # s3 public media settings
         MEDIAFILES_LOCATION = 'media'
-        MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+        MEDIA_URL = '/media/'
+        MEDIA_ROOT = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
         DEFAULT_FILE_STORAGE = 'core.storage_backeds.MediaStorage'
 
-
         STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-        
+
     elif not TESTOFS3:
 
         STATIC_URL = '/static/'
