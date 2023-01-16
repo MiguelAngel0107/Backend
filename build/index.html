@@ -1,3 +1,5 @@
+{% load static %}
+
 <!DOCTYPE html>
 <html lang="es">
   <head>
@@ -12,8 +14,9 @@
     <link rel="apple-touch-icon" href="/logo192.png" />
     <link rel="manifest" href="/manifest.json" />
     <title>OwnDark</title>
-    <script defer="defer" src="https://owndark.s3.amazonaws.com/static/js/main.85b5eada.js"></script>
-    <link href="https://owndark.s3.amazonaws.com/static/css/main.d3d3f834.css" rel="stylesheet" />
+    
+    <script defer="defer" src="{% static 'js/main.85b5eada.js' %}"></script>
+    <link rel="stylesheet" type="text/css" href="{% static 'css/main.d3d3f834.css' %}">
   </head>
   <body>
     <noscript>You need to enable JavaScript to run this app.</noscript>
