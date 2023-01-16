@@ -262,48 +262,36 @@ EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
-#----------------------------------------------------------------------------------------------------------------------
-#----------------------------------------------------------------------------------------------------------------------
+TESTOFS3 = False
 
-"""# django-ckeditor will not work with S3 through django-storages without this line in settings.py
-AWS_QUERYSTRING_AUTH = False
+if DEBUG and TESTOFS3:
 
-# aws settings
-AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-AWS_STORAGE_BUCKET_NAME = 'devinvsc'
+    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
+    AWS_QUERYSTRING_AUTH = False
 
-AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-AWS_DEFAULT_ACL = 'public-read'
+    # aws settings
+    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+    AWS_STORAGE_BUCKET_NAME = 'devinvsc'
 
-# s3 static settings
-STATICFILES_LOCATION = 'static'
-STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
-STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+    AWS_DEFAULT_ACL = 'public-read'
 
-# s3 public media settings
-MEDIAFILES_LOCATION = 'media'
-MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-DEFAULT_FILE_STORAGE = 'core.storage_backeds.MediaStorage'
+    # s3 static settings
+    STATICFILES_LOCATION = 'static'
+    STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
-STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+    # s3 public media settings
+    MEDIAFILES_LOCATION = 'media'
+    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+    DEFAULT_FILE_STORAGE = 'core.storage_backeds.MediaStorage'
 
-# MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-# STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
-# STATIC_URL = '/static/'
-# MEDIA_URL = '/media/'
-
-if not DEBUG:
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/') 
-    #STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'"""
+    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
 
 
-#----------------------------------------------------------------------------------------------------------------------
-#----------------------------------------------------------------------------------------------------------------------
-
-if DEBUG:
+if DEBUG and not TESTOFS3:
     MEDIA_URL = '/media/'
     STATIC_URL = '/static/'
     STATIC_ROOT = os.path.join(BASE_DIR, 'static')
@@ -323,30 +311,38 @@ if not DEBUG:
     EMAIL_PORT = config('EMAIL_PORT')
     EMAIL_USE_TLS = config('EMAIL_USE_TLS')
 
-    # django-ckeditor will not work with S3 through django-storages without this line in settings.py
-    AWS_QUERYSTRING_AUTH = False
+    if TESTOFS3:
+        # django-ckeditor will not work with S3 through django-storages without this line in settings.py
+        AWS_QUERYSTRING_AUTH = False
 
-    # aws settings
-    AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
-    AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
-    AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
+        # aws settings
+        AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
+        AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
+        AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
 
-    AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
-    AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
-    AWS_DEFAULT_ACL = 'public-read'
+        AWS_S3_CUSTOM_DOMAIN = f'{AWS_STORAGE_BUCKET_NAME}.s3.amazonaws.com'
+        AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
+        AWS_DEFAULT_ACL = 'public-read'
 
-    """# s3 static settings
-    STATICFILES_LOCATION = 'static'
-    STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)"""
+        # s3 static settings
+        STATICFILES_LOCATION = 'static'
+        STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
+        STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
 
-    STATIC_URL = '/static/'
-
-    # s3 public media settings
-    MEDIAFILES_LOCATION = 'media'
-    MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
-    DEFAULT_FILE_STORAGE = 'core.storage_backeds.MediaStorage'
+        # s3 public media settings
+        MEDIAFILES_LOCATION = 'media'
+        MEDIA_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, MEDIAFILES_LOCATION)
+        DEFAULT_FILE_STORAGE = 'core.storage_backeds.MediaStorage'
 
 
-    STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+        STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+        
+    elif not TESTOFS3:
+
+        STATIC_URL = '/static/'
+        STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+        STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
+        STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+
+        MEDIA_URL = '/media/'
+        MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
