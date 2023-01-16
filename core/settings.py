@@ -335,11 +335,15 @@ if not DEBUG:
         AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
         AWS_DEFAULT_ACL = 'public-read'
 
-        # s3 static settings
+        """# s3 static settings
         STATICFILES_LOCATION = 'static'
         STATIC_URL = '/static/'
         STATIC_ROOT = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
-        STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
+        STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'"""
+
+        STATIC_URL = '/static/'
+        STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+        STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
         # s3 public media settings
         MEDIAFILES_LOCATION = 'media'
