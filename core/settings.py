@@ -327,7 +327,6 @@ if not DEBUG:
     AWS_QUERYSTRING_AUTH = False
 
     # aws settings
-
     AWS_ACCESS_KEY_ID = config('AWS_ACCESS_KEY_ID')
     AWS_SECRET_ACCESS_KEY = config('AWS_SECRET_ACCESS_KEY')
     AWS_STORAGE_BUCKET_NAME = config('AWS_STORAGE_BUCKET_NAME')
@@ -336,10 +335,12 @@ if not DEBUG:
     AWS_S3_OBJECT_PARAMETERS = {'CacheControl': 'max-age=86400'}
     AWS_DEFAULT_ACL = 'public-read'
 
-    # s3 static settings
+    """# s3 static settings
     STATICFILES_LOCATION = 'static'
     STATICFILES_STORAGE = 'core.storage_backeds.StaticStorage'
-    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)
+    STATIC_URL = "https://%s/%s/" % (AWS_S3_CUSTOM_DOMAIN, STATICFILES_LOCATION)"""
+
+    STATIC_URL = '/static/'
 
     # s3 public media settings
     MEDIAFILES_LOCATION = 'media'
@@ -348,4 +349,4 @@ if not DEBUG:
 
 
     STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
-    # STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
+    STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
