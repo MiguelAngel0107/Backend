@@ -349,7 +349,7 @@ if not DEBUG:
 
         STATICFILES_DIRS = (os.path.join(BASE_DIR, 'build/static'),)
 
-    elif not TESTOFS3:
+    if not TESTOFS3:
 
         STATIC_URL = '/static/'
         STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles/')
